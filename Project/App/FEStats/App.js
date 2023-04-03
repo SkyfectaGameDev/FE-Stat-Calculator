@@ -1,8 +1,9 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image} from 'react-native';
-import portrait from './assets/images/portraits/shadowDragon/Marth_Portrait_FE11.webp'
+import { StyleSheet, Text, View, Image, SafeAreaView, ScrollView} from 'react-native';
+import portrait from './assets/images/portraits/shadowDragon/shiida.png'
 import { SelectList } from 'react-native-dropdown-select-list';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 
 export default function App() {
@@ -36,50 +37,95 @@ export default function App() {
   ]
   //#endregion
 
+  //#region ---------- Table Contents ----------
+
+  // - Headers -
+  const headers = ['Lvl', 'HP', 'Str', 'Mag', 'Skl', 'Spd', 'Lck', 'Def', 'Res']
+
+  // - Rows -
+  const rows = [
+    ['1', '', '', '', '', '', '', '', ''],
+    ['2', '', '', '', '', '', '', '', ''],
+    ['3', '', '', '', '', '', '', '', ''],
+    ['4', '', '', '', '', '', '', '', ''],
+    ['5', '', '', '', '', '', '', '', ''],
+    ['6', '', '', '', '', '', '', '', ''],
+    ['7', '', '', '', '', '', '', '', ''],
+    ['8', '', '', '', '', '', '', '', ''],
+    ['9', '', '', '', '', '', '', '', ''],
+    ['10', '', '', '', '', '', '', '', ''],
+    ['11', '', '', '', '', '', '', '', ''],
+    ['12', '', '', '', '', '', '', '', ''],
+    ['13', '', '', '', '', '', '', '', ''],
+    ['14', '', '', '', '', '', '', '', ''],
+    ['15', '', '', '', '', '', '', '', ''],
+    ['16', '', '', '', '', '', '', '', ''],
+    ['17', '', '', '', '', '', '', '', ''],
+    ['18', '', '', '', '', '', '', '', ''],
+    ['19', '', '', '', '', '', '', '', ''],
+    ['20', '', '', '', '', '', '', '', '']
+  ]
+
   //#region ---------- App Structure (HTML) ----------
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>FEStats Alpha 0.23.0403c</Text>
-      <View style={styles.characterProfile}>
-        <View>
-          <Image style={styles.characterPortrait} source={portrait} alt="Placeholder Portrait"></Image>
-          <Text style={styles.characterName}>Marth</Text>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>FEStats Alpha 0.23.0403d</Text>
+        <View style={styles.characterProfile}>
+          <View>
+            <Image style={styles.characterPortrait} source={portrait} alt="Placeholder Portrait"></Image>
+            <Text style={styles.characterName}>Shiida</Text>
+          </View>
+          <View style={styles.characterDropdown}>
+            {/* ----- Dropdown Menu 1 ----- */}
+            <SelectList
+              data={data1}
+              setSelected={setSelected}
+              boxStyles={{backgroundColor: '#fff', width: 210, height: 40}}
+              inputStyles={{fontSize: 10}}
+              dropdownStyles={{backgroundColor: '#fff'}}
+              dropdownTextStyles={{fontSize: 10}}
+              >
+            </SelectList>
+            {/* ----- Dropdown Menu 2 ----- */}
+            <SelectList
+              data={data2}
+              setSelected={setSelected}
+              boxStyles={{backgroundColor: '#fff', width: 210, height: 40}}
+              inputStyles={{fontSize: 10}}
+              dropdownStyles={{backgroundColor: '#fff'}}
+              dropdownTextStyles={{fontSize: 10}}
+              >
+            </SelectList>
+            {/* ----- Dropdown Menu 3 ----- */}
+            <SelectList
+              data={data3}
+              setSelected={setSelected}
+              boxStyles={{backgroundColor: '#fff', width: 210, height: 40}}
+              inputStyles={{fontSize: 10}}
+              dropdownStyles={{backgroundColor: '#fff'}}
+              dropdownTextStyles={{fontSize: 10}}>
+            </SelectList>
+          </View>
         </View>
-        <View style={styles.characterDropdown}>
-          {/* ----- Dropdown Menu 1 ----- */}
-          <SelectList
-            data={data1}
-            setSelected={setSelected}
-            boxStyles={{backgroundColor: '#fff', width: 210, height: 40}}
-            inputStyles={{fontSize: 10}}
-            dropdownStyles={{backgroundColor: '#fff'}}
-            dropdownTextStyles={{fontSize: 10}}
-            >
-          </SelectList>
-          {/* ----- Dropdown Menu 2 ----- */}
-          <SelectList
-            data={data2}
-            setSelected={setSelected}
-            boxStyles={{backgroundColor: '#fff', width: 210, height: 40}}
-            inputStyles={{fontSize: 10}}
-            dropdownStyles={{backgroundColor: '#fff'}}
-            dropdownTextStyles={{fontSize: 10}}
-            >
-          </SelectList>
-          {/* ----- Dropdown Menu 3 ----- */}
-          <SelectList
-            data={data3}
-            setSelected={setSelected}
-            boxStyles={{backgroundColor: '#fff', width: 210, height: 40}}
-            inputStyles={{fontSize: 10}}
-            dropdownStyles={{backgroundColor: '#fff'}}
-            dropdownTextStyles={{fontSize: 10}}
-            >
-          </SelectList>
-        </View>
-      </View>
-      <StatusBar style="auto" />
-    </View>
+        {/* ----- Stats Table ----- */}
+        <Table style={styles.statsTable} borderStyle={{borderWidth: 1}}>
+          <Row 
+            data={headers}
+            style={{margins: 20, width: 320, height: 30, backgroundColor: '#e6e6e6'}}
+            textStyle={{textAlign: 'center', fontWeight: 'bold'}}
+          />
+          <TableWrapper>
+            <Rows
+              data={rows}
+              style={{margins: 20, width: 320, backgroundColor: '#fff'}}
+              textStyle={{textAlign: 'center', fontSize: 10}}
+            />
+          </TableWrapper>
+        </Table>
+        <StatusBar style="auto" />
+      </ScrollView>
+    </SafeAreaView>
   );
   //#endregion
 }
@@ -92,8 +138,9 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    width: 360,
     color: '#fff',
-    padding: 30,
+    paddingTop: 30,
     fontSize: 24,
     textAlign: 'center',
   },
@@ -121,12 +168,17 @@ const styles = StyleSheet.create({
 
   characterName: {
     color: '#fff',
-    textAlign: 'center'
+    textAlign: 'center',
+    width: 100,
   },
 
   characterDropdown: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
+  },
+
+  statsTable: {
+    marginHorizontal: 20,
   }
 });
 //#endregion
@@ -134,8 +186,10 @@ const styles = StyleSheet.create({
 
 /*#region ---------- Credits ----------
 
-Programming:            Skyfecta
-Logic & Math:           AuroraHertz
-Dropdown Select List:   https://github.com/danish1658/react-native-dropdown-select-list
+Programming:                          Skyfecta
+Logic & Math:                         AuroraHertz
+
+React Native Dropdown Select List:    https://github.com/danish1658/react-native-dropdown-select-list
+React Native Table Component:         https://github.com/Gil2015/react-native-table-component
 
 #endregion */
