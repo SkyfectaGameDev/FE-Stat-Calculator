@@ -1,9 +1,12 @@
 import React from 'react';
+import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, SafeAreaView, ScrollView} from 'react-native';
-import portrait from './assets/images/portraits/shadowDragon/shiida.png'
 import { SelectList } from 'react-native-dropdown-select-list';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import Checkbox from 'expo-checkbox';
+
+import portrait from './assets/images/portraits/shadowDragon/shiida.png'
 
 
 export default function App() {
@@ -70,7 +73,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
-        <Text style={styles.title}>FEStats Alpha 0.23.0403d</Text>
+        <Text style={styles.title}>FEStats Alpha 0.23.0403e</Text>
         <View style={styles.characterProfile}>
           <View>
             <Image style={styles.characterPortrait} source={portrait} alt="Placeholder Portrait"></Image>
@@ -85,8 +88,9 @@ export default function App() {
               inputStyles={{fontSize: 10}}
               dropdownStyles={{backgroundColor: '#fff'}}
               dropdownTextStyles={{fontSize: 10}}
-              >
-            </SelectList>
+              placeholder={'Select Character'}
+              searchPlaceholder=''
+            />
             {/* ----- Dropdown Menu 2 ----- */}
             <SelectList
               data={data2}
@@ -95,8 +99,9 @@ export default function App() {
               inputStyles={{fontSize: 10}}
               dropdownStyles={{backgroundColor: '#fff'}}
               dropdownTextStyles={{fontSize: 10}}
-              >
-            </SelectList>
+              placeholder={'Pre-Promoted Class'}
+              searchPlaceholder=''
+              />
             {/* ----- Dropdown Menu 3 ----- */}
             <SelectList
               data={data3}
@@ -104,8 +109,17 @@ export default function App() {
               boxStyles={{backgroundColor: '#fff', width: 210, height: 40}}
               inputStyles={{fontSize: 10}}
               dropdownStyles={{backgroundColor: '#fff'}}
-              dropdownTextStyles={{fontSize: 10}}>
-            </SelectList>
+              dropdownTextStyles={{fontSize: 10}}
+              placeholder={'Promoted Class'}
+              searchPlaceholder=''
+            />
+            {/* ----- Checkbox ----- */}
+            <View style={styles.checkGroup}>
+              <Text style={styles.checkText}>Dynamic Growth</Text>
+              <Checkbox
+                
+              />
+            </View>
           </View>
         </View>
         {/* ----- Stats Table ----- */}
@@ -174,7 +188,26 @@ const styles = StyleSheet.create({
 
   characterDropdown: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    gap: 2
+  },
+
+  checkGroup: {
+    height: 38,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: 'grey',
+    borderRadius: 10
+  },
+
+  checkText: {
+    fontSize: 10,
+    paddingLeft: 20,
+    paddingRight: 62
   },
 
   statsTable: {
