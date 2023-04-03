@@ -40,6 +40,10 @@ export default function App() {
   ]
   //#endregion
 
+  // - Checkbox -
+  const [isChecked, setChecked] = useState(false);
+
+
   //#region ---------- Table Contents ----------
 
   // - Headers -
@@ -73,7 +77,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
-        <Text style={styles.title}>FEStats Alpha 0.23.0403e</Text>
+        <Text style={styles.title}>FEStats Alpha 0.23.0404a</Text>
         <View style={styles.characterProfile}>
           <View>
             <Image style={styles.characterPortrait} source={portrait} alt="Placeholder Portrait"></Image>
@@ -117,7 +121,7 @@ export default function App() {
             <View style={styles.checkGroup}>
               <Text style={styles.checkText}>Dynamic Growth</Text>
               <Checkbox
-                
+                value={isChecked} onValueChange={setChecked}
               />
             </View>
           </View>
@@ -207,7 +211,7 @@ const styles = StyleSheet.create({
   checkText: {
     fontSize: 10,
     paddingLeft: 20,
-    paddingRight: 62
+    paddingRight: 63
   },
 
   statsTable: {
